@@ -1,13 +1,12 @@
-﻿using Checkout.Catalog.Api.Infrastructure.ActionResults;
-using Checkout.Catalog.Api.Infrastructure.Exceptions;
+﻿using Checkout.Basket.Api.Infrastructure.ActionResults;
+using Checkout.Basket.Api.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace Checkout.Catalog.Api.Infrastructure.Filters
+namespace Checkout.Basket.Api.Infrastructure.Filters
 {
     public partial class HttpGlobalExceptionFilter : IExceptionFilter
     {
@@ -26,30 +25,26 @@ namespace Checkout.Catalog.Api.Infrastructure.Filters
                 context.Exception,
                 context.Exception.Message);
 
-            if (context.Exception.GetType() == typeof(CatalogDomainException))
+            if (context.Exception.GetType() == typeof(BasketDomainException))
             {
-                var problemDetails = new ValidationProblemDetails()
+                var json = new JsonErrorResponse
                 {
-                    Instance = context.HttpContext.Request.Path,
-                    Status = StatusCodes.Status400BadRequest,
-                    Detail = "Please refer to the errors property for additional details."
+                    Messages = new[] { context.Exception.Message }
                 };
 
-                problemDetails.Errors.Add("DomainValidations", new string[] { context.Exception.Message.ToString() });
-
-                context.Result = new BadRequestObjectResult(problemDetails);
+                context.Result = new BadRequestObjectResult(json);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
             else
             {
                 var json = new JsonErrorResponse
                 {
-                    Messages = new[] { "An error ocurred." }
+                    Messages = new[] { "An error occurred. Try it again." }
                 };
 
                 if (env.IsDevelopment())
                 {
-                    json.DeveloperMeesage = context.Exception;
+                    json.DeveloperMessage = context.Exception;
                 }
 
                 context.Result = new InternalServerErrorObjectResult(json);

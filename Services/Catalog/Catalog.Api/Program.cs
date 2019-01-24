@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -26,12 +21,5 @@ namespace Catalog.Api
                     builder.AddConsole();
                     builder.AddDebug();
                 });
-                //.UseSerilog((builderContext, config) =>
-                //{
-                //    config
-                //        .MinimumLevel.Information()
-                //        .Enrich.FromLogContext()
-                //        .WriteTo.Console();
-                //});
     }
 }

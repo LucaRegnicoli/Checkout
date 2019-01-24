@@ -50,7 +50,7 @@ namespace Catalog.Api
             app.UseSwagger()
               .UseSwaggerUI(c =>
               {
-                  c.SwaggerEndpoint($"{ (!string.IsNullOrEmpty(pathBase) ? pathBase : string.Empty) }/swagger/v1/swagger.json", "Catalog.API V1");
+                  c.SwaggerEndpoint($"{ (!string.IsNullOrEmpty(pathBase) ? pathBase : string.Empty) }/swagger/v1/swagger.json", "Catalog.Api V1");
               });
         }
     }
@@ -126,9 +126,9 @@ namespace Catalog.Api
                 options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
                 {
-                    Title = "Checkout - Catalog HTTP API",
+                    Title = "Catalog HTTP API",
                     Version = "v1",
-                    Description = "The Catalog Microservice HTTP API. This is a Data-Driven/CRUD microservice sample",
+                    Description = "The Catalog Service HTTP API",
                     TermsOfService = "Terms Of Service"
                 });
             });

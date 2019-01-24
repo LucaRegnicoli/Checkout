@@ -16,12 +16,12 @@ namespace Catalog.Api.Controllers
     [ApiController]
     public class CatalogController : Controller
     {
-        private readonly ICatalogRepository _catalogRepository;
+        private readonly ICatalogRepository _repository;
         private readonly CatalogSettings _settings;
 
         public CatalogController(ICatalogRepository repository, IOptionsSnapshot<CatalogSettings> settings)
         {
-            _catalogRepository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _settings = settings?.Value ?? new CatalogSettings();
         }
 
@@ -35,7 +35,7 @@ namespace Catalog.Api.Controllers
         {
             if (id <= 0) return BadRequest();
 
-            var item = await _catalogRepository.GetCatalogItem(id);
+            var item = await _repository.GetCatalogItem(id);
 
             if (item != null)
                 return item;
@@ -51,7 +51,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsAsync([FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
-            var itemsOnPage = await _catalogRepository.GetCatalogItems(pageIndex, pageSize, out long totalItems);
+            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, out long totalItems);
 
             return new PaginatedItemsViewModel<CatalogItem>(pageIndex, pageSize, totalItems, itemsOnPage);
         }
@@ -62,7 +62,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsWithNameAsync(string name, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
-            var itemsOnPage = await _catalogRepository.GetCatalogItems(pageIndex, pageSize, null, null, name, out long totalItems);
+            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, null, null, name, out long totalItems);
 
             return new PaginatedItemsViewModel<CatalogItem>(pageIndex, pageSize, totalItems, itemsOnPage);
         }
@@ -73,7 +73,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByTypeIdAndBrandIdAsync(int catalogTypeId, int? catalogBrandId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
-            var itemsOnPage = await _catalogRepository.GetCatalogItems(pageIndex, pageSize, catalogBrandId, catalogTypeId, out long totalItems);
+            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, catalogBrandId, catalogTypeId, out long totalItems);
 
             return new PaginatedItemsViewModel<CatalogItem>(pageIndex, pageSize, totalItems, itemsOnPage);
         }
@@ -84,7 +84,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsByBrandIdAsync(int? catalogBrandId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
-            var itemsOnPage = await _catalogRepository.GetCatalogItems(pageIndex, pageSize, catalogBrandId, out long totalItems);
+            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, catalogBrandId, out long totalItems);
 
             return new PaginatedItemsViewModel<CatalogItem>(pageIndex, pageSize, totalItems, itemsOnPage);
         }
@@ -95,7 +95,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(List<CatalogType>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<CatalogType>>> CatalogTypesAsync()
         {
-            return await _catalogRepository.GetTypes();
+            return await _repository.GetTypes();
         }
 
         // GET api/v1/[controller]/catalogbrands
@@ -104,7 +104,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(List<CatalogBrand>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<CatalogBrand>>> CatalogBrandsAsync()
         {
-            return await _catalogRepository.GetBrands();
+            return await _repository.GetBrands();
         }
 
         // PUT api/v1/[controller]/items
