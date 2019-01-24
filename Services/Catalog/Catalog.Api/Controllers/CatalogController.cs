@@ -22,7 +22,7 @@ namespace Catalog.Api.Controllers
         public CatalogController(ICatalogRepository repository, IOptionsSnapshot<CatalogSettings> settings)
         {
             _catalogRepository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _settings = settings.Value;
+            _settings = settings?.Value ?? new CatalogSettings();
         }
 
         // GET api/v1/[controller]/items/10
