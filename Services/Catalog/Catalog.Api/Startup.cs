@@ -31,7 +31,6 @@ namespace Catalog.Api
                 .AddEventBus(Configuration)
                 .AddSwagger()
                 .AddCustomHealthCheck(Configuration);
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
