@@ -1,4 +1,5 @@
-# checkout
+# Checkout
+
 Basket.Api 
 
 This API will allow our users to set up and manage an order of items.  
