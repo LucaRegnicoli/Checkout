@@ -18,11 +18,12 @@ namespace Catalog.UnitTests
             var expectedName = "FakeItemA";
             var catalogServiceMock = new Mock<ICatalogRepository>();
 
-            catalogServiceMock.Setup(x => x.GetCatalogItem
-            (
-                It.IsAny<int>()
-             ))
-             .Returns(Task.FromResult(GetFakeItem()));
+            catalogServiceMock
+                .Setup(x => x.GetCatalogItem
+                (
+                    It.IsAny<int>()
+                ))
+                .Returns(Task.FromResult(GetFakeItem()));
 
             // Act
             var catalogController = new CatalogController(catalogServiceMock.Object, null);
