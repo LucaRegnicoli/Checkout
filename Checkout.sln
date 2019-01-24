@@ -11,17 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{4ACE1D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{22C3E623-17E4-4DB1-AADD-D13ACFC9BFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.UnitTests", "Services\Basket\Basket.UnitTests\Basket.UnitTests.csproj", "{0F412D85-532B-4BA0-93BD-393E1BCD3A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.UnitTests", "Services\Basket\Basket.UnitTests\Basket.UnitTests.csproj", "{0F412D85-532B-4BA0-93BD-393E1BCD3A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.FunctionalTests", "Services\Basket\Basket.FunctionalTests\Basket.FunctionalTests.csproj", "{DC395E4C-297D-495C-AD55-9486CE1C9900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.FunctionalTests", "Services\Basket\Basket.FunctionalTests\Basket.FunctionalTests.csproj", "{DC395E4C-297D-495C-AD55-9486CE1C9900}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{C0EFE27C-7EA5-4AB3-A29A-AFB7780144EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "Services\Catalog\Catalog.Api\Catalog.Api.csproj", "{933D352E-C857-4B45-90DB-B4B6C8BD34F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Api", "Services\Catalog\Catalog.Api\Catalog.Api.csproj", "{933D352E-C857-4B45-90DB-B4B6C8BD34F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.UnitTests", "Services\Catalog\Catalog.UnitTests\Catalog.UnitTests.csproj", "{01F6DE84-795D-4181-A6EA-BF702B4D11F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.UnitTests", "Services\Catalog\Catalog.UnitTests\Catalog.UnitTests.csproj", "{01F6DE84-795D-4181-A6EA-BF702B4D11F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.FunctionalTests", "Services\Catalog\Catalog.FunctionalTests\Catalog.FunctionalTests.csproj", "{C7E463D5-93D0-4F2C-B16F-F1F4A2283013}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.FunctionalTests", "Services\Catalog\Catalog.FunctionalTests\Catalog.FunctionalTests.csproj", "{C7E463D5-93D0-4F2C-B16F-F1F4A2283013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.Api", "Gateways\Desktop.Api\Desktop.Api.csproj", "{C090F6BB-8A64-4FF8-83AD-7A0AF9E5F565}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{C7E463D5-93D0-4F2C-B16F-F1F4A2283013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7E463D5-93D0-4F2C-B16F-F1F4A2283013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7E463D5-93D0-4F2C-B16F-F1F4A2283013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C090F6BB-8A64-4FF8-83AD-7A0AF9E5F565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C090F6BB-8A64-4FF8-83AD-7A0AF9E5F565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C090F6BB-8A64-4FF8-83AD-7A0AF9E5F565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C090F6BB-8A64-4FF8-83AD-7A0AF9E5F565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{933D352E-C857-4B45-90DB-B4B6C8BD34F8} = {C0EFE27C-7EA5-4AB3-A29A-AFB7780144EF}
 		{01F6DE84-795D-4181-A6EA-BF702B4D11F0} = {C0EFE27C-7EA5-4AB3-A29A-AFB7780144EF}
 		{C7E463D5-93D0-4F2C-B16F-F1F4A2283013} = {C0EFE27C-7EA5-4AB3-A29A-AFB7780144EF}
+		{C090F6BB-8A64-4FF8-83AD-7A0AF9E5F565} = {22C3E623-17E4-4DB1-AADD-D13ACFC9BFF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E489D9C7-E84B-4700-BFA3-9E053092240F}
