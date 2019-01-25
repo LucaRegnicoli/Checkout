@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Desktop.Api
 {
@@ -18,7 +12,25 @@ namespace Desktop.Api
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost
+                .CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(cb =>
+                {
+                    var sources = cb.Sources;
+                    sources.Insert(3, new Microsoft.Extensions.Configuration.Json.JsonConfigurationSource()
+                    {
+                        Optional = true,
+                        Path = "appsettings.localhost.json",
+                        ReloadOnChange = false
+                    });
+                })
+                .UseSerilog((builderContext, config) =>
+                {
+                    config
+                        .MinimumLevel.Information()
+                        .Enrich.FromLogContext()
+                        .WriteTo.Console();
+                })
                 .UseStartup<Startup>();
     }
 }

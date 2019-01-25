@@ -8,7 +8,7 @@ namespace Checkout.Basket.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class BasketController : Controller
+    public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _repository;
 
@@ -43,10 +43,7 @@ namespace Checkout.Basket.Api.Controllers
                 return BadRequest();
 
             // Create the event message
-            //var eventMessage = new UserCheckoutAcceptedIntegrationEvent(
-            //    basketCheckout.CustomerId, basketCheckout.City, basketCheckout.Street,
-            //    basketCheckout.State, basketCheckout.Country, basketCheckout.ZipCode, basketCheckout.CardNumber, basketCheckout.CardHolderName,
-            //    basketCheckout.CardExpiration, basketCheckout.CardSecurityNumber, basketCheckout.CardTypeId, basketCheckout.RequestId, basket);
+            //var eventMessage = new UserCheckoutAccepted(basketCheckout.CustomerId, basketCheckout.City, basketCheckout.CardNumber, basketCheckout.CardHolderName ...);
 
             // Sends an integration event to payment.api to convert basket to an order and proceed with the payment
             //_eventBus.Publish(eventMessage);
@@ -54,7 +51,7 @@ namespace Checkout.Basket.Api.Controllers
             return Accepted();
         }
 
-        // DELETE api/values/5
+        // DELETE api/5
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         public async Task DeleteBasketByIdAsync(string id)
