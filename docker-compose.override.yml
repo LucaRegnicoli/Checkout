@@ -7,7 +7,7 @@ services:
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=44368
     ports:
-      - "50483:80"
+      - "5101:80"
       - "44368:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -18,7 +18,7 @@ services:
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=44321
     ports:
-      - "49949:80"
+      - "5102:80"
       - "44321:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -29,8 +29,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=44380
+      - urls__basket=http://basket.api
+      - urls__catalog=http://catalog.api
     ports:
-      - "53265:80"
+      - "5201:80"
       - "44380:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

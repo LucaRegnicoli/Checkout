@@ -8,7 +8,7 @@ namespace Checkout.Catalog.Api.Repositories
     {
         Task<CatalogItem> GetCatalogItem(int id);
 
-        Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, out long count);
+        Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, IEnumerable<int> ids, out long count);
 
         Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, string name, out long count);
 
@@ -17,6 +17,8 @@ namespace Checkout.Catalog.Api.Repositories
         Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, out long count);
 
         Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, string name, out long count);
+
+        Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, string name, IEnumerable<int> ids, out long count);
 
         Task<List<CatalogBrand>> GetBrands();
 

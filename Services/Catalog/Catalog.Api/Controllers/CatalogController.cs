@@ -49,9 +49,23 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(IEnumerable<CatalogItem>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsAsync([FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
+        public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsAsync([FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0, string ids = null)
         {
-            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, out long totalItems);
+            if (!string.IsNullOrEmpty(ids))
+            {
+                var convertingIds = ids.Split(',').Select(id => (Ok: int.TryParse(id, out int x), Value: x));
+
+                if (!convertingIds.All(nid => nid.Ok)) return BadRequest("ids value invalid. Must be comma-separated list of numbers");
+
+                var convertedIds = convertingIds.Select(id => id.Value);
+
+                var items = await _repository.GetCatalogItems(pageIndex, pageSize, convertedIds, out long count);
+
+                return Ok(items);
+            }
+
+
+            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, ids?.Split(',').Select(int.Parse)?.ToList(), out long totalItems);
 
             return new PaginatedItemsViewModel<CatalogItem>(pageIndex, pageSize, totalItems, itemsOnPage);
         }
@@ -62,7 +76,7 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaginatedItemsViewModel<CatalogItem>>> ItemsWithNameAsync(string name, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
-            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, null, null, name, out long totalItems);
+            var itemsOnPage = await _repository.GetCatalogItems(pageIndex, pageSize, name, out long totalItems);
 
             return new PaginatedItemsViewModel<CatalogItem>(pageIndex, pageSize, totalItems, itemsOnPage);
         }

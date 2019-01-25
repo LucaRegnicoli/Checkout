@@ -31,20 +31,25 @@ namespace Checkout.Catalog.Api.Repositories
 
             return Task.FromResult(CatalogItems.FirstOrDefault(c => c.Id == id));
         }
+        
+        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, IEnumerable<int> ids, out long count) => GetCatalogItems(pageIndex, pageSize, null, null, null, ids, out count);
 
-        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, out long count) => GetCatalogItems(pageIndex, pageSize, null, null, null, out count);
+        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, string name, out long count) => GetCatalogItems(pageIndex, pageSize, null, null, name, null, out count);
 
-        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, string name, out long count) => GetCatalogItems(pageIndex, pageSize, null, null, name, out count);
+        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, out long count) => GetCatalogItems(pageIndex, pageSize, brand, null, null, null, out count);
 
-        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, out long count) => GetCatalogItems(pageIndex, pageSize, brand, null, null, out count);
+        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, out long count) => GetCatalogItems(pageIndex, pageSize, brand, type, null, null, out count);
 
-        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, out long count) => GetCatalogItems(pageIndex, pageSize, brand, type, null, out count);
+        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, string name, out long count) => GetCatalogItems(pageIndex, pageSize, brand, type, name, null, out count);
 
-        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, string name, out long count)
+        public Task<List<CatalogItem>> GetCatalogItems(int pageIndex, int pageSize, int? brand, int? type, string name, IEnumerable<int> ids, out long count)
         {
             if (CatalogItems == null) CatalogItems = GetPreconfiguredItems();
 
             var items = CatalogItems.AsQueryable();
+
+            if (ids != null && ids.Any())
+                items = items.Where(i => ids.Contains(i.Id));
 
             if (brand.HasValue)
                 items = items.Where(i => i.CatalogBrandId == brand);
