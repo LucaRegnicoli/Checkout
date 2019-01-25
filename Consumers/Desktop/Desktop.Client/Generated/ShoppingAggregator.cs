@@ -46,7 +46,7 @@ namespace Desktop.Client
         public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -57,7 +57,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -71,7 +71,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -89,7 +89,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -110,7 +110,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify client subscription.
@@ -132,7 +132,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify client subscription.
@@ -157,7 +157,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -174,10 +174,6 @@ namespace Desktop.Client
             {
                 throw new ArgumentNullException("baseUri");
             }
-            if (credentials == null)
-            {
-                throw new ArgumentNullException("credentials");
-            }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
             if (this.Credentials != null)
@@ -187,7 +183,7 @@ namespace Desktop.Client
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShoppingaggregatorfordesktopclientsHTTPAPI class.
+        /// Initializes a new instance of the ShoppingAggregator class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
