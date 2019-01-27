@@ -26,3 +26,4 @@ Note: The Mobile.Api has not been fully implemented, it's just a placeholder pro
 #### Desktop.Client
 
 Client library that makes use of the API endpoints exposed in Desktop.Api, the purpose of this code to provide authors of client applications a simple framework to use in their applications.
+In order to speed up the creation of the prototype I have decided to use the REST API client generated code but the resulting classes are marked as 'internal', this could make easier the refactoring into a different methodology or strategy.
