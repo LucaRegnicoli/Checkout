@@ -20,3 +20,7 @@ The BFF is tightly coupled to a specific user experience, and will typically be 
 
 https://samnewman.io/patterns/architectural/bff/
 https://microservices.io/patterns/apigateway.html
+
+#### Desktop.Client
+
+Client library that makes use of the API endpoints exposed in Desktop.Api, the purpose of this code to provide authors of client applications a simple framework to use in their applications.
